@@ -42,7 +42,7 @@ class BURvNN(RvNN):
 
 		max_level = int(level.max().cpu().item())
 		for j in range(max_level, -1, -1):
-			h = self.forward_step(x_hat, h, j, adj)
+			h = self.forward_step(x_hat, h, j, adj, level)
 
 		root_idx = (level == 0).float().unsqueeze(0)
 		root_rep = root_idx.mm(h)
