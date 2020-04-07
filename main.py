@@ -35,6 +35,7 @@ def main():
         print('------------Fold %d--------------'%fold)
         for key in range(len(label_mapping)):
             print('Label %s\tP %0.3f\tR %0.3f\tF %0.3f' % (label_mapping[key], *fold_result[key]))
+        print('Accuracy\t\t\t%0.3f' % fold_result[-2])
         print('Macro\t\t\tP %0.3f\tR %0.3f\tF %0.3f' % fold_result[-1])
         all_result.append(fold_result)
     print('---------------------------------')
@@ -43,9 +44,11 @@ def main():
         avg_r = sum([all_result[fold][key][1] for fold in range(total_fold)]) / total_fold
         avg_f = sum([all_result[fold][key][2] for fold in range(total_fold)]) / total_fold
         print('Avg Label %s\tP %0.3f\tR %0.3f\tF %0.3f' % (label_mapping[key], avg_p, avg_r, avg_f))
+    avg_acc = sum([all_result[fold][-2] for fold in range(total_fold)]) / total_fold
     avg_mp = sum([all_result[fold][-1][0] for fold in range(total_fold)]) / total_fold
     avg_mr = sum([all_result[fold][-1][1] for fold in range(total_fold)]) / total_fold
     avg_mf = sum([all_result[fold][-1][2] for fold in range(total_fold)]) / total_fold
+    print('Avg Accuracy\t\t\t%0.3f' % avg_acc)
     print('Avg Macro\t\t\tP %0.3f\tR %0.3f\tF %0.3f' % (avg_mp, avg_mr, avg_mf))
 
 if __name__ == '__main__':

@@ -5,6 +5,7 @@ import torch.optim as optim
 from tqdm import tqdm
 import numpy as np
 from sklearn.metrics import precision_recall_fscore_support as prf_fn
+from sklearn.metrics import accuracy_score
 from rvnn import BURvNN, TDRvNN
 
 class Wrapper():
@@ -22,7 +23,8 @@ class Wrapper():
 
 		self.model.to(args.device)
 		self.parameters = [p for p in self.model.parameters() if p.requires_grad]
-		self.optimizer = optim.Adam(self.parameters)
+		# self.optimizer = optim.Adam(self.parameters)
+		self.optimizer = optim.SGD(self.parameters, lr=0.01, momentum=0.9)
 		self.loss_fn = nn.CrossEntropyLoss()
 
 	def run(self):
@@ -35,6 +37,7 @@ class Wrapper():
 			print('------------Epoch %d--------------'%epoch)
 			for key in range(len(self.args.label_mapping)):
 				print('Label %s\tP %0.3f\tR %0.3f\tF %0.3f' % (self.args.label_mapping[key], *prf[key]))
+			print('Accuracy\t\t\t%0.3f' % prf[-2])
 			print('Macro\t\t\tP %0.3f\tR %0.3f\tF %0.3f' % prf[-1])
 		return best_prf
 
@@ -81,5 +84,6 @@ class Wrapper():
 		all_prf = prf_fn(all_y_true, all_y_pred, average=None)
 		all_prf = [(p, r, f) for p, r, f in zip(*all_prf[:-1])]
 		macro_prf = prf_fn(all_y_true, all_y_pred, average='macro')[:-1]
-		all_prf = all_prf + [macro_prf]
+		accuracy = accuracy_score(all_y_true, all_y_pred)
+		all_prf = all_prf + [accuracy, macro_prf]
 		return all_prf
