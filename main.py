@@ -69,4 +69,5 @@ if __name__ == '__main__':
         'fold_folder': 'data/nfold/'
     }
     loader = RumorDataLoader(inp_files, args.device)
+    seeds(args.seed)
     main()

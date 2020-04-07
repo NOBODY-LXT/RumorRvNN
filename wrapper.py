@@ -33,13 +33,14 @@ class Wrapper():
 			self.train(epoch)
 			prf = self.evaluate()
 			# if best_prf is None or prf[-1][-1] > best_prf[-1][-1]:
-			if best_prf is None or prf[-2] > best_prf[-2]:
-				best_prf = prf
 			print('------------Epoch %d--------------'%epoch)
 			for key in range(len(self.args.label_mapping)):
 				print('Label %s\tP %0.3f\tR %0.3f\tF %0.3f' % (self.args.label_mapping[key], *prf[key]))
 			print('Accuracy\t\t\t%0.3f' % prf[-2])
 			print('Macro\t\t\tP %0.3f\tR %0.3f\tF %0.3f' % prf[-1])
+			if best_prf is None or prf[-2] > best_prf[-2]:
+				best_prf = prf
+				print('Accuracy Improved to \t\t\t%0.3f' % prf[-2])
 		return best_prf
 
 	def train(self, epoch):
