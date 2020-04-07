@@ -32,7 +32,8 @@ class Wrapper():
 		for epoch in range(self.args.n_epoch):
 			self.train(epoch)
 			prf = self.evaluate()
-			if best_prf is None or prf[-1][-1] > best_prf[-1][-1]:
+			# if best_prf is None or prf[-1][-1] > best_prf[-1][-1]:
+			if best_prf is None or prf[-2] > best_prf[-2]:
 				best_prf = prf
 			print('------------Epoch %d--------------'%epoch)
 			for key in range(len(self.args.label_mapping)):
