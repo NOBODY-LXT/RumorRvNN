@@ -16,11 +16,8 @@ class RvNN(nn.Module):
 		self.decoder = nn.Linear(args.hidden_dim, args.n_class)
 
 	def forward_step(self, x_hat, h, j_level, adj, level):
-
-		# level_adj = (adj == level).float()
-		cur_level = (level == j_level).float()
-		print(cur_level.size())
-		exit(0)
+		cur_level = (level == j_level).float().unsqueeze(1)
+		level_adj = adj * cur_level
 		hs = level_adj.mm(h)
 		rj = torch.sigmoid(self.Wr(x_hat) + self.Ur(hs))
 		zj = torch.sigmoid(self.Wz(x_hat) + self.Uz(hs))
@@ -68,7 +65,7 @@ class TDRvNN(RvNN):
 
 		max_level = int(level.max().cpu().item())
 		for j in range(max_level, -1, -1):
-			h = self.forward_step(x_hat, h, j_level, adj, level)
+			h = self.forward_step(x_hat, h, j, adj, level)
 
 		root_rep = torch.max(h, dim=0, keepdim=True)[0]
 		logit = self.decoder(root_rep)
