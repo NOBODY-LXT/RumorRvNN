@@ -11,6 +11,7 @@ from wrapper import Wrapper
 # Avg Label unverified	P 0.613	R 0.602	F 0.605
 # Avg Accuracy			0.654
 # Avg Macro			P 0.658	R 0.654	F 0.654
+
 # 15 BU
 # Avg Label true		P 0.768	R 0.784	F 0.775
 # Avg Label false		P 0.751	R 0.713	F 0.726
@@ -19,8 +20,16 @@ from wrapper import Wrapper
 # Avg Accuracy			0.726
 # Avg Macro			P 0.731	R 0.728	F 0.726
 
+# 16 BU
+# Avg Label true		P 0.801	R 0.816	F 0.805
+# Avg Label false		P 0.748	R 0.810	F 0.776
+# Avg Label non-rumor		P 0.647	R 0.563	F 0.595
+# Avg Label unverified	P 0.676	R 0.666	F 0.667
+# Avg Accuracy			0.724
+# Avg Macro			P 0.718	R 0.714	F 0.711
+
 parser = argparse.ArgumentParser()
-parser.add_argument('--model', type=str, default='BU_RvNN')
+parser.add_argument('--model', type=str, default='TD_RvNN')
 parser.add_argument('--seed', type=int, default=2020)
 parser.add_argument('--dataset', type=int, default=16)
 parser.add_argument('--hidden_dim', type=int, default=100)

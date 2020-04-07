@@ -64,9 +64,13 @@ class TDRvNN(RvNN):
 		h = torch.zeros((seq_size, self.args.hidden_dim), device=self.args.device)
 
 		max_level = int(level.max().cpu().item())
-		for j in range(max_level, -1, -1):
+		# for j in range(max_level, -1, -1):
+		for j in range(max_level+1):
 			h = self.forward_step(x_hat, h, j, adj, level)
 
+		leaf_mask = (level == max_level).float().unsqueeze(1).repeat(1, h.size(1))
+		zero_vec = -9e15 * torch.ones_like(h)
+		h = torch.where(leaf_mask==0, h, zero_vec)
 		root_rep = torch.max(h, dim=0, keepdim=True)[0]
 		logit = self.decoder(root_rep)
 		return logit
