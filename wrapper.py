@@ -24,7 +24,7 @@ class Wrapper():
 		self.model.to(args.device)
 		self.parameters = [p for p in self.model.parameters() if p.requires_grad]
 		# self.optimizer = optim.Adam(self.parameters)
-		self.optimizer = optim.SGD(self.parameters, lr=0.01, momentum=0.9)
+		self.optimizer = optim.SGD(self.parameters, lr=0.005, momentum=0.9)
 		self.loss_fn = nn.CrossEntropyLoss()
 
 	def run(self):
