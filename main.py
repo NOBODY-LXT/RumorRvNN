@@ -4,9 +4,14 @@ import numpy as np
 import random
 from data_loader import RumorDataLoader
 from wrapper import Wrapper
+# 15 TD
 # 16 TD
-
-
+# Avg Label true		P 0.879	R 0.889	F 0.878
+# Avg Label false		P 0.828	R 0.807	F 0.816
+# Avg Label non-rumor		P 0.681	R 0.634	F 0.655
+# Avg Label unverified	P 0.732	R 0.805	F 0.761
+# Avg Accuracy			0.782
+# Avg Macro			P 0.780	R 0.784	F 0.777
 # 15 BU
 # Avg Label true		P 0.768	R 0.784	F 0.775
 # Avg Label false		P 0.751	R 0.713	F 0.726
@@ -26,7 +31,7 @@ from wrapper import Wrapper
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, default='TD_RvNN')
 parser.add_argument('--seed', type=int, default=2020)
-parser.add_argument('--dataset', type=int, default=16)
+parser.add_argument('--dataset', type=int, default=15)
 parser.add_argument('--hidden_dim', type=int, default=100)
 parser.add_argument('--n_class', type=int, default=4)
 parser.add_argument('--n_epoch', type=int, default=20)
