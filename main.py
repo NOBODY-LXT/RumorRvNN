@@ -5,6 +5,12 @@ import random
 from data_loader import RumorDataLoader
 from wrapper import Wrapper
 # 15 TD
+# Avg Label true		P 0.841	R 0.830	F 0.835
+# Avg Label false		P 0.774	R 0.739	F 0.753
+# Avg Label non-rumor		P 0.732	R 0.703	F 0.715
+# Avg Label unverified	P 0.716	R 0.782	F 0.746
+# Avg Accuracy			0.762
+# Avg Macro			P 0.766	R 0.763	F 0.762
 # 16 TD
 # Avg Label true		P 0.879	R 0.889	F 0.878
 # Avg Label false		P 0.828	R 0.807	F 0.816
