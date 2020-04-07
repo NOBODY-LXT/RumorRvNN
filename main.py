@@ -57,8 +57,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     args.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     
-    args.max_doc_len = 75
-    args.max_sen_len = 100
     inp_files = {
         'source_folder': 'data/RvNN_resource/', 
         'data_x': 'data.BU_RvNN.vol_5000.txt', 
