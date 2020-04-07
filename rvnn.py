@@ -23,7 +23,7 @@ class RvNN(nn.Module):
 		zj = torch.sigmoid(self.Wz(x_hat) + self.Uz(hs))
 		hj_hat = torch.tanh(self.Wh(x_hat) + self.Uh(hs*rj))
 		hj = (1. - zj) * hs + zj * hj_hat
-		h = h + hj
+		h = (cur_level == 0).float() * h + cur_level * hj
 		return h
 
 class BURvNN(RvNN):
