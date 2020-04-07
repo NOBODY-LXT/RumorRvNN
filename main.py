@@ -29,7 +29,7 @@ from wrapper import Wrapper
 # Avg Macro			P 0.718	R 0.714	F 0.711
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model', type=str, default='TD_RvNN')
+parser.add_argument('--model', type=str, default='BU_RvNN')
 parser.add_argument('--seed', type=int, default=2020)
 parser.add_argument('--dataset', type=int, default=16)
 parser.add_argument('--hidden_dim', type=int, default=100)
