@@ -150,10 +150,10 @@ class RumorDataLoader():
                 queue.extend(node.children)
             level = [tree_i.level for tree_i in tree_info]
 
-            all_adj[eid] = torch.from_numpy(adj).float()
-            all_tfidf[eid] = torch.from_numpy(tfidf_matrix).float()
-            all_labels[eid] = torch.from_numpy(np.array(label_mapping[eid_label])).long().unsqueeze(0)
-            all_level[eid] = torch.from_numpy(np.array(level)).float()
+            all_adj[eid] = torch.from_numpy(adj).float().to(self.args.device)
+            all_tfidf[eid] = torch.from_numpy(tfidf_matrix).float().to(self.args.device)
+            all_labels[eid] = torch.from_numpy(np.array(label_mapping[eid_label])).long().unsqueeze(0).to(self.args.device)
+            all_level[eid] = torch.from_numpy(np.array(level)).float().to(self.args.device)
         return all_adj, all_tfidf, all_level, all_labels
 
 if __name__ == "__main__":
