@@ -11,6 +11,7 @@ parser.add_argument('--seed', type=int, default=2020)
 parser.add_argument('--dataset', type=int, default=15)
 parser.add_argument('--hidden_dim', type=int, default=100)
 parser.add_argument('--n_class', type=int, default=4)
+parser.add_argument('--n_epoch', type=int, default=3)
 
 def seeds(seed):
     # to ensure reproducibility

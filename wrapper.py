@@ -27,7 +27,7 @@ class Wrapper():
 
 	def run(self):
 		best_prf = None
-		for epoch in range(600):
+		for epoch in range(self.args.n_epoch):
 			self.train(epoch)
 			prf = self.evaluate()
 			if best_prf is None or prf[-1][-1] > best_prf[-1][-1]:
@@ -47,7 +47,7 @@ class Wrapper():
 				x = {'adj': train_adj[key], 'tfidf': train_tfidf[key], 'level': train_level[key]}
 				y_true = train_label[key]
 				loss = self.update(x, y_true)
-				pbar.set_description("key %s\tLoss %0.4f" % (key, loss))
+				pbar.set_description("Loss %0.4f" % (loss))
 				pbar.update()
 
 	def update(self, x, y_true):
